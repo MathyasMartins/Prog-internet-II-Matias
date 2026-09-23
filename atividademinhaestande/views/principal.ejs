@@ -1,0 +1,79 @@
+<%- include('partials/header') %>
+
+<section class="space-y-6">
+  <header class="flex justify-between items-center border-b pb-4">
+    <h2 class="text-2xl font-bold text-slate-800">Catálogo de Livros</h2>
+    <a href="/livros/novo" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition text-sm">
+      + Adicionar Livro
+    </a>
+  </header>
+
+  <!-- Desafio Extra: Resumo da Estante -->
+  <% 
+    const totalLivros = livros.length;
+    const lidos = livros.filter(l => l.status === 'Lido').length;
+    const totalPaginas = livros.reduce((acc, l) => acc + Number(l.paginas || 0), 0);
+  %>
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+    <article class="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
+      <h3 class="text-sm font-semibold text-slate-500">Total de Livros</h3>
+      <p class="text-2xl font-bold text-slate-800"><%= totalLivros %></p>
+    </article>
+    <article class="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
+      <h3 class="text-sm font-semibold text-slate-500">Livros Concluídos</h3>
+      <p class="text-2xl font-bold text-emerald-600"><%= lidos %></p>
+    </article>
+    <article class="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
+      <h3 class="text-sm font-semibold text-slate-500">Total de Páginas</h3>
+      <p class="text-2xl font-bold text-indigo-600"><%= totalPaginas %></p>
+    </article>
+  </div>
+
+  <% if (livros.length === 0) { %>
+    <p class="text-center py-8 text-slate-500">Nenhum livro registado até ao momento.</p>
+  <% } else { %>
+    <div class="overflow-x-auto bg-white rounded-lg shadow-sm border border-slate-200">
+      <table class="w-full text-left border-collapse">
+        <thead class="bg-slate-100 border-b border-slate-200 text-slate-700 uppercase text-xs">
+          <tr>
+            <th class="p-4">Título</th>
+            <th class="p-4">Autor</th>
+            <th class="p-4">Páginas</th>
+            <th class="p-4">Estado</th>
+            <th class="p-4 text-center">Ações</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-200 text-sm">
+          <% livros.forEach((livro, index) => { %>
+            <tr class="hover:bg-slate-50">
+              <td class="p-4 font-semibold text-slate-900"><%= livro.titulo %></td>
+              <td class="p-4 text-slate-600"><%= livro.autor %></td>
+              <td class="p-4 text-slate-600"><%= livro.paginas %></td>
+              <td class="p-4">
+                <span class="px-2.5 py-1 rounded-full text-xs font-medium <%= livro.status === 'Lido' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800' %>">
+                  <%= livro.status %>
+                </span>
+              </td>
+              <td class="p-4 text-center">
+                <menu class="inline-flex gap-2">
+                  <li>
+                    <a href="/livros/status/<%= index %>" class="px-3 py-1 bg-slate-200 hover:bg-slate-300 text-slate-800 rounded text-xs transition">
+                      Marcar como <%= livro.status === 'Lendo' ? 'Lido' : 'Lendo' %>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/livros/remover/<%= index %>" onclick="return confirm('Deseja excluir este livro da sua estante?')" class="px-3 py-1 bg-rose-100 hover:bg-rose-200 text-rose-700 rounded text-xs transition">
+                      Excluir
+                    </a>
+                  </li>
+                </menu>
+              </td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  <% } %>
+</section>
+
+<%- include('partials/footer') %>

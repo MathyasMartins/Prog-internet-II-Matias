@@ -1,0 +1,19 @@
+{
+  "name": "minha-estante",
+  "version": "1.0.0",
+  "description": "Aplicação de gestão de leituras em Node.js com MVC e EJS",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node --watch app.js"
+  },
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.22.3"
+  },
+  "devDependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

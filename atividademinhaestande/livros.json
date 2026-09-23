@@ -1,0 +1,14 @@
+[
+  {
+    "titulo": "Dom Casmurro",
+    "autor": "Machado de Assis",
+    "paginas": 256,
+    "status": "Lido"
+  },
+  {
+    "titulo": "O Hobbit",
+    "autor": "J.R.R. Tolkien",
+    "paginas": 310,
+    "status": "Lendo"
+  }
+]
